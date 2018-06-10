@@ -23,7 +23,7 @@ usersRouter.put('/:id', async (req, res) => {
 });
 
 usersRouter.delete('/:id', async (req, res) => {
-    const del = await db.deleteUser(req.body);
+    const del = await db.deleteUser(req.params.id);
     res.json(del);
 });
 

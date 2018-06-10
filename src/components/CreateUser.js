@@ -7,7 +7,7 @@ export const CreateUser = (props) =>{
     };
 
 
-    return (<button onClick={()=>props.onUserCreate({username:'Groot',age:15})}>
+    return (<button onClick={()=>props.onUserCreate({username:'Rocket',age:15})}>
         Create New User!
     </button>);
 };

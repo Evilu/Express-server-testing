@@ -8,8 +8,8 @@ export const DeleteUser = (props) =>{
     };
 
 
-    return (<button onClick={()=>props.onUserDelete(props.id)}>
-        Delete User!
-    </button>);
+    return (
+       <div>g</div>
+    );
 };
 

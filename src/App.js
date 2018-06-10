@@ -5,6 +5,7 @@ import {Api} from './api';
 import {UsersList} from "./components/UsersList";
 import {Loader} from "./components/Loader";
 import {CreateUser} from "./components/CreateUser";
+
 import {NameForm} from "./components/changeUser"
  class App extends Component {
 
@@ -65,15 +66,19 @@ import {NameForm} from "./components/changeUser"
          })
      };
 
-    onUserDeleteHandler = (user)=>{
+    onUserDeleteHandler = (user)=>{debugger
         this.startLoading();
 
         Api.deleteUser (user)
-            .then((deleteUser) => {
-            this.setState((prevState) => ({
-                users: [...prevState.users,deleteUser ]
-            }));
-            this.stopLoading();
+            .then(() => {
+                Api.getUsers()
+                    .then((users) => {
+                        this.setState((prevState) => ({
+                            users: users
+                        }));
+
+                        this.stopLoading();
+                    });
         })
     };
 
@@ -89,11 +94,12 @@ import {NameForm} from "./components/changeUser"
                 </header>
                 {this.state.isLoading ? (<Loader/>) :
                     (<section className='app'>
-                        <CreateUser onUserCreate={this.onUserCreateHandler}/>
+                        <CreateUser onUserCreate={this.onUserCreateHandler} />
                         <NameForm></NameForm>
 
+                        <UsersList  users={this.state.users} onUserDelete={this.onUserDeleteHandler}  />
 
-                        <UsersList  users={this.state.users}/>
+
                     </section>)}
             </div>
         );

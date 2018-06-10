@@ -10,14 +10,18 @@ export const UsersList = (props) => {
             id: PropTypes.number,
             username: PropTypes.string,
             age: PropTypes.number
-        }))
+
+        })),
+        onUserCreate: PropTypes.func.isRequired
     };
 
     return (<ul>
         {props.users.length &&
         (props.users.map(user => (
             <li key={user.id}>{user.id}:{user.username} -- {user.age}
-                <DeleteUser onUserDelete={props.onUserDeleteHandler} />
+                <button onClick={(e)=>{props.onUserDelete(user)}}>
+                    Delete User!
+                </button>
             </li>
         )))}
     </ul>);

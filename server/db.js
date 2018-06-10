@@ -34,12 +34,13 @@ class DB {
         });
     }
 
-    deleteUser(user) {
+    deleteUser(userId) {
         return new Promise((resolve) => {
             setTimeout(() => {
-                this.data = this.data.filter(u => u.id !== user.id);
+                const userIndex = this.data.users.findIndex(u => u.id == userId);
+                this.data.users.splice(userIndex,1)
                 this.writeToJson();
-                resolve(true);
+                resolve({status:"ok"});
             }, 500);
         });
     }

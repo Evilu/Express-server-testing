@@ -9,7 +9,7 @@ export class Api {
         return this.post('/users', user);
     }
     static deleteUser(user) {
-        return this.del('/users', user);
+        return this.del(`/users/${user.id}`, user);
     }
 
     static updateUser(user) {
@@ -31,15 +31,14 @@ export class Api {
         })
             .then(res => res.json());
     }
-    static del(url, body) {
+    static del(url) {
         return fetch(this.baseUrl + url, {
-            method: 'DELETE',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: 'DELETE'
         })
-            .then(res => res.json());
+            .then((res) => {
+                debugger
+                return res.json()
+            });
     }
 
     static put (url, body) {
